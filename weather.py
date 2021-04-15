@@ -10,22 +10,18 @@ import json, requests, sys
 
 if len(sys.argv) < 2:
 	print("Error: need to enter city name and 2-letter country code")
-	sys.exit
+	sys.exit()
 print("Success")
 
-print("Content of sys.agrv list ")
+print("Contents of sys.argv list ")
 print(sys.argv[1:])
 location = ''.join(sys.argv[1:])
+print('Location: ' + location)
 
-print("Location: " + location)
-
-url = 'https://api.openweathermap.org/data/2.5/forecast/daily?q=%s&cnt=3&APPID=%s ' % (location, APPID)
+url = 'https://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=' + APPID
 
 response = requests.get(url)
 response.raise_for_status()
 
-weatherData = json.loads(response.text)
-w = weatherData['list']
-print('Current weather in %s: ' % (location))
-print(w[0]['weather'][0]['main'], '-', w[0]['weather'][0]['description'])
-print()
+WeatherData = json.loads(response.text)
+print(WeatherData)
